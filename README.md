@@ -51,4 +51,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 ## 👤 Autor
 
 Eric Rocha
-- GitHub: [@ericrocha97(https://github.com/ericrocha97)
+- GitHub: [@ericrocha97](https://github.com/ericrocha97)

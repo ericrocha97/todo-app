@@ -14,13 +14,15 @@ jobs:
   build:
     name: Build Release APK
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       # 1. Checkout o código
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Instala o JDK 17 (necessário para AGP 8+ e Kotlin 2.0+)
+      # 2. Instala o JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -28,7 +30,7 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      # 3. Instala o Android SDK + Build Tools versão 34.0.0
+      # 3. Instala o Android SDK
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
@@ -42,9 +44,9 @@ jobs:
       - name: Build Release APK
         run: ./gradlew assembleRelease
 
-      # 6. Assina o APK com a keystore fornecida nos secrets
+      # 6. Assina o APK
       - name: Sign APK
-        uses: r0adkll/sign-android-release@v1
+        uses: ilharp/sign-android-release@v1
         with:
           releaseDirectory: app/build/outputs/apk/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
@@ -54,7 +56,7 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: "34.0.0"
 
-      # 7. (Opcional) Renomeia o APK assinado
+      # 7. Renomeia o APK assinado
       - name: Rename signed APK
         run: |
           mv app/build/outputs/apk/release/app-release-unsigned-signed.apk \

@@ -27,7 +27,7 @@ Este é um aplicativo de gerenciamento de tarefas (Todo List) que permite aos us
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/ericrocha97/Todo.git
+git clone https://github.com/ericrocha97/todo-app.git
 ```
 
 2. Abra o projeto no Android Studio

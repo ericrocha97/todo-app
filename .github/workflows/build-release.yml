@@ -1,5 +1,6 @@
 name: Build & Publish Release APK
 
+# Dispara o workflow manualmente com inputs
 on:
   workflow_dispatch:
     inputs:
@@ -14,6 +15,7 @@ jobs:
   build:
     name: Build Release APK
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
 
@@ -44,7 +46,7 @@ jobs:
       - name: Build Release APK
         run: ./gradlew assembleRelease
 
-      # 6. Assina o APK
+      # 6. Assina o APK com a nova ação e os parâmetros corrigidos
       - name: Sign APK
         uses: ilharp/sign-android-release@v1
         with:
@@ -53,8 +55,7 @@ jobs:
           keyAlias: ${{ secrets.KEY_ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-        env:
-          BUILD_TOOLS_VERSION: "34.0.0"
+          buildToolsVersion: "34.0.0"
 
       # 7. Renomeia o APK assinado
       - name: Rename signed APK
